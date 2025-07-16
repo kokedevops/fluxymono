@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0.0'
+description = 'Ejemplos de programación reactiva con Project Reactor'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClass = 'com.example.FluxYMonoMain'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Project Reactor Core
+    implementation 'io.projectreactor:reactor-core:3.5.0'
+    
+    // SLF4J API
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    
+    // Logback implementation
+    implementation 'ch.qos.logback:logback-classic:1.4.7'
+    
+    // JUnit 5 para tests
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    
+    // Reactor Test
+    testImplementation 'io.projectreactor:reactor-test:3.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Task personalizada para ejecutar los ejemplos adicionales
+task runExamples(type: JavaExec) {
+    group = 'application'
+    description = 'Ejecuta los ejemplos adicionales de Mono y Flux'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.EjemplosAdicionales'
+}
+
+// Configuración para encoding UTF-8
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
